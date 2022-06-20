@@ -1,7 +1,10 @@
 package com.parkit.parkingsystem.constants;
 
 // mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
+// mc 20/06/2022d : 5%-discount for recurring users
 public class DBConstants {
+
+  private DBConstants() {}
 
   public static final String GET_NEXT_PARKING_SPOT =
       "select min(PARKING_NUMBER) from parking where AVAILABLE = true and TYPE = ?";
@@ -22,4 +25,8 @@ public class DBConstants {
   public static final String GET_TICKET =
       "select t.PARKING_NUMBER, t.ID, t.PRICE, t.IN_TIME, t.OUT_TIME, p.TYPE from ticket t,parking p where p.parking_number = t.parking_number and t.VEHICLE_REG_NUMBER=? order by t.IN_TIME desc  limit 1";
   // =< mc 20/06/2022b
+  // => mc 20/06/2022d : 5%-discount for recurring users
+  public static final String GET_TICKET_WITH_SAME_VEHICLE_NUMBER =
+      "select count(VEHICLE_REG_NUMBER) from ticket  where VEHICLE_REG_NUMBER=? and OUT_TIME is not null";
+  // =< mc 20/06/2022d
 }

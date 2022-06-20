@@ -12,6 +12,7 @@ import com.parkit.parkingsystem.constants.ParkingType;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 
+// mc 20/06/2022d : 5%-discount for recurring users
 public class TicketDAO {
 
   private static final Logger logger = LogManager.getLogger("TicketDAO");
@@ -87,4 +88,28 @@ public class TicketDAO {
     }
     return false;
   }
+
+  // => mc 20/06/2022d : 5%-discount for recurring users
+  public int getVehicleRecurrenceNumber(String vehicleRegNumber) {
+    Connection con = null;
+    int numberOfRecurrence = 0;
+    try {
+      con = dataBaseConfig.getConnection();
+      PreparedStatement ps = con.prepareStatement(DBConstants.GET_TICKET_WITH_SAME_VEHICLE_NUMBER);
+      ps.setString(1, vehicleRegNumber);
+      ResultSet rs = ps.executeQuery();
+      if (rs.next()) {
+        numberOfRecurrence = rs.getInt(1);
+      }
+      dataBaseConfig.closeResultSet(rs);
+      dataBaseConfig.closePreparedStatement(ps);
+    } catch (Exception ex) {
+      logger.error("Error while retrieving the vehicle recurrence number", ex);
+    } finally {
+      dataBaseConfig.closeConnection(con);
+      return numberOfRecurrence;
+    }
+  }
+  // =< mc 20/06/2022d
+
 }

@@ -13,6 +13,7 @@ import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 
+// mc 20/06/2022d : 5%-discount for recurring users
 @ExtendWith(MockitoExtension.class)
 public class TicketDAOIT {
 
@@ -119,5 +120,37 @@ public class TicketDAOIT {
     final Ticket ticketReadingResult = ticketDAO.getTicket("ABCDEF");
     assertThat(ticket.compare(ticketReadingResult)).isTrue();
   }
+
+
+  // => mc 20/06/2022d : 5%-discount for recurring users
+  // ----------------------------------------------------------------------------------------------------
+  // Method getVehicleRecurrenceNumber
+  // ----------------------------------------------------------------------------------------------------
+  @Test
+  public void getVehicleRecurrenceNumber_shouldNullString_ofVehicleRegNumber() throws Exception {
+    // GIVEN
+    String vehicleRegNumber = null;
+    // WHEN
+    final int result = ticketDAO.getVehicleRecurrenceNumber(vehicleRegNumber);
+    // THEN
+    assertThat(result == 0);
+  }
+
+  @Test
+  public void getVehicleRecurrenceNumber_shouldReadTicket() throws Exception {
+    // GIVEN
+    ticket.setInTime(new Date());
+    ticket.setOutTime(new Date());
+    final boolean returnStatusSaveTicket1 = ticketDAO.saveTicket(ticket);
+
+    ticket.setInTime(new Date());
+    ticket.setOutTime(null);
+    final boolean returnStatusSaveTicket2 = ticketDAO.saveTicket(ticket);
+    // WHEN
+    final int ticketReadingResult = ticketDAO.getVehicleRecurrenceNumber("ABCDEF");
+    // THEN
+    assertThat(ticketReadingResult == 1);
+  }
+  // =< mc 20/06/2022d
 
 }
