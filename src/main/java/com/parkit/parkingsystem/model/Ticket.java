@@ -2,6 +2,7 @@ package com.parkit.parkingsystem.model;
 
 import java.util.Date;
 
+// mc 20/06/2022a : Add test compare ticket
 public class Ticket {
   private int id;
   private ParkingSpot parkingSpot;
@@ -58,7 +59,7 @@ public class Ticket {
     this.outTime = outTime;
   }
 
-  // =>kkkk
+  // => mc 20/06/2022a : Add test compare ticket
   public boolean compare(Object o) {
     if (this == o)
       return true;
@@ -91,5 +92,5 @@ public class Ticket {
       return false;
     return true;
   }
-  // =<kkkk
+  // =< mc 20/06/2022a
 }

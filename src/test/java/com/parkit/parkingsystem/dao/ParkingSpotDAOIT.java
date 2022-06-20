@@ -15,6 +15,7 @@ import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
 import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.model.ParkingSpot;
 
+// mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
 @ExtendWith(MockitoExtension.class)
 public class ParkingSpotDAOIT {
 
@@ -82,5 +83,29 @@ public class ParkingSpotDAOIT {
     // THEN
     assertThat(result).isFalse();
   }
+
+
+  // => mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
+  // ----------------------------------------------------------------------------------------------------
+  // Method getParkingSpot
+  // ----------------------------------------------------------------------------------------------------
+  @Test
+  public void getParkingSpot_shouldZero_ofParkingType() {
+    // GIVEN
+    // WHEN
+    final ParkingSpot result = parkingSpotDAO.getParkingSpot(0);
+    // THEN
+    assertThat(result == null);
+  }
+
+  @Test
+  public void getParkingSpot_shouldParkingType() {
+    // GIVEN
+    // WHEN
+    final ParkingSpot result = parkingSpotDAO.getParkingSpot(1);
+    // THEN
+    assertThat(result.getId() == 1);
+  }
+  // =< mc 20/06/2022b
 
 }
