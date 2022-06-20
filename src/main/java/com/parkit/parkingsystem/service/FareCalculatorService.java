@@ -3,6 +3,7 @@ package com.parkit.parkingsystem.service;
 import com.parkit.parkingsystem.constants.Fare;
 import com.parkit.parkingsystem.model.Ticket;
 
+// mc 20/06/2022c : Free 30-min parking (stories STORY#1)
 public class FareCalculatorService {
   // MC 06/06/2020a : Correction of parking price calculation
 
@@ -24,6 +25,12 @@ public class FareCalculatorService {
     // int duration = outHour - inHour;
     double duration = (outHour - inHour) / (3600 * 1000);
     // =< MC 06/06/2020a
+    // => mc 20/06/2022c : Free 30-min parking (stories STORY#1)
+    // Park for free when the user stays less than 30 minutes
+    if (outHour - inHour < 30 * 60 * 1000) {
+      duration = 0.0;
+    }
+    // =< mc 20/06/2022c
 
     switch (ticket.getParkingSpot().getParkingType()) {
       case CAR: {

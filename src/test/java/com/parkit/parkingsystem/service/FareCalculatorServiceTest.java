@@ -1,5 +1,6 @@
 package com.parkit.parkingsystem.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.Date;
@@ -17,6 +18,7 @@ import com.parkit.parkingsystem.constants.ParkingType;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 
+// mc 20/06/2022c : Free 30-min parking (stories STORY#1)
 @ExtendWith(MockitoExtension.class)
 public class FareCalculatorServiceTest {
 
@@ -125,5 +127,57 @@ public class FareCalculatorServiceTest {
     // THEN
     assertEquals((24 * arg2), ticket.getPrice());
   }
+
+
+  // => mc 20/06/2022c : Free 30-min parking (stories STORY#1)
+  // ----------------------------------------------------------------------------------------------------
+  // Method calculateFare
+  // Park for free when the user stays less than 30 minutes
+  // ----------------------------------------------------------------------------------------------------
+  @ParameterizedTest(name = "{0} + {1}")
+  @MethodSource("listOfParkingTypeParametersToTest")
+  public void calculateFare_when30Minutes00secondesCarBike(ParkingType arg1, double arg2) {
+    // GIVEN
+    inTime.setTime(currentTime - (30 * 60 * 1000));
+    ticket.setInTime(inTime);
+    ticket.setOutTime(outTime);
+    ParkingSpot parkingSpot = new ParkingSpot(1, arg1, false);
+    ticket.setParkingSpot(parkingSpot);
+    // WHEN
+    fareCalculatorService.calculateFare(ticket);
+    // THEN
+    assertThat(ticket.getPrice() > 0);
+  }
+
+  @ParameterizedTest(name = "{0} + {1}")
+  @MethodSource("listOfParkingTypeParametersToTest")
+  public void calculateFare_when29Minutes59secondesCarBike(ParkingType arg1, double arg2) {
+    // GIVEN
+    inTime.setTime(currentTime - (30 * 60 - 1) * 1000);
+    ticket.setInTime(inTime);
+    ticket.setOutTime(outTime);
+    ParkingSpot parkingSpot = new ParkingSpot(1, arg1, false);
+    ticket.setParkingSpot(parkingSpot);
+    // WHEN
+    fareCalculatorService.calculateFare(ticket);
+    // THEN
+    assertThat(ticket.getPrice() == 0);
+  }
+
+  @ParameterizedTest(name = "{0} + {1}")
+  @MethodSource("listOfParkingTypeParametersToTest")
+  public void calculateFare_when30Minutes01secondesCarBike(ParkingType arg1, double arg2) {
+    // GIVEN
+    inTime.setTime(currentTime - (30 * 60 + 1) * 1000);
+    ticket.setInTime(inTime);
+    ticket.setOutTime(outTime);
+    ParkingSpot parkingSpot = new ParkingSpot(1, arg1, false);
+    ticket.setParkingSpot(parkingSpot);
+    // WHEN
+    fareCalculatorService.calculateFare(ticket);
+    // THEN
+    assertThat(ticket.getPrice() > 0);
+  }
+  // =< mc 20/06/2022c
 
 }
