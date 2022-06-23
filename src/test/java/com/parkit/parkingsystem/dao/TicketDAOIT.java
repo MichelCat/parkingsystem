@@ -13,7 +13,7 @@ import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 
-// mc 20/06/2022d : 5%-discount for recurring users
+// mc 20/06/2022d : 5%-discount for recurring users (storie)
 @ExtendWith(MockitoExtension.class)
 public class TicketDAOIT {
 
@@ -90,7 +90,7 @@ public class TicketDAOIT {
     // WHEN
     final Ticket ticketReadingResult = ticketDAO.getTicket("ABCDEF");
     // THEN
-    assertThat(ticket.compare(ticketReadingResult));
+    assertThat(ticket.compare(ticketReadingResult)).isTrue();
   }
 
 
@@ -122,7 +122,7 @@ public class TicketDAOIT {
   }
 
 
-  // => mc 20/06/2022d : 5%-discount for recurring users
+  // => mc 20/06/2022d : 5%-discount for recurring users (storie)
   // ----------------------------------------------------------------------------------------------------
   // Method getVehicleRecurrenceNumber
   // ----------------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ public class TicketDAOIT {
     // WHEN
     final int result = ticketDAO.getVehicleRecurrenceNumber(vehicleRegNumber);
     // THEN
-    assertThat(result == 0);
+    assertThat(result).isZero();
   }
 
   @Test
@@ -149,7 +149,7 @@ public class TicketDAOIT {
     // WHEN
     final int ticketReadingResult = ticketDAO.getVehicleRecurrenceNumber("ABCDEF");
     // THEN
-    assertThat(ticketReadingResult == 1);
+    assertThat(ticketReadingResult).isEqualTo(1);
   }
   // =< mc 20/06/2022d
 

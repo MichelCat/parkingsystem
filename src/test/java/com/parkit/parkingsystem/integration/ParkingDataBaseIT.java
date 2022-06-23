@@ -19,7 +19,7 @@ import com.parkit.parkingsystem.model.Ticket;
 import com.parkit.parkingsystem.service.ParkingService;
 import com.parkit.parkingsystem.util.InputReaderUtil;
 
-// mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
+// mc 20/06/2022b : Fix integration tests (storie)
 @ExtendWith(MockitoExtension.class)
 public class ParkingDataBaseIT {
 
@@ -56,27 +56,25 @@ public class ParkingDataBaseIT {
   public void testParkingACar() {
     ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
     parkingService.processIncomingVehicle();
-    // TODO: check that a ticket is actualy saved in DB and Parking table is updated with
-    // availability
-    // => mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
+    // => mc 20/06/2022b : Fix integration tests (storie)
     // THEN
     final Ticket ticketReadingResult = ticketDAO.getTicket("ABCDEF");
-    assertThat(ticketReadingResult.getParkingSpot().getId() == 1);
-    assertThat(ticketReadingResult.getVehicleRegNumber() == "ABCDEF");
-    assertThat(ticketReadingResult.getPrice() == 0);
-    assertThat(ticketReadingResult.getInTime() != null);
-    assertThat(ticketReadingResult.getOutTime() == null);
+    assertThat(ticketReadingResult.getParkingSpot().getId()).isEqualTo(1);
+    assertThat(ticketReadingResult.getVehicleRegNumber()).isEqualTo("ABCDEF");
+    assertThat(ticketReadingResult.getPrice()).isZero();
+    assertThat(ticketReadingResult.getInTime()).isNotNull();
+    assertThat(ticketReadingResult.getOutTime()).isNull();
 
     final ParkingSpot parkingSpotReadingResult = parkingSpotDAO.getParkingSpot(1);
-    assertThat(parkingSpotReadingResult.getId() == 1);
-    assertThat(parkingSpotReadingResult.getParkingType() == ParkingType.CAR);
-    assertThat(parkingSpotReadingResult.isAvailable() == false);
+    assertThat(parkingSpotReadingResult.getId()).isEqualTo(1);
+    assertThat(parkingSpotReadingResult.getParkingType()).isEqualTo(ParkingType.CAR);
+    assertThat(parkingSpotReadingResult.isAvailable()).isFalse();
     // =< mc 20/06/2022b
   }
 
   @Test
   public void testParkingLotExit() {
-    // => mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
+    // => mc 20/06/2022b : Fix integration tests (storie)
     // testParkingACar();
     // ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO,
     // ticketDAO);
@@ -84,20 +82,19 @@ public class ParkingDataBaseIT {
     parkingService.processIncomingVehicle();
     // =< mc 20/06/2022b
     parkingService.processExitingVehicle();
-    // TODO: check that the fare generated and out time are populated correctly in the database
-    // => mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
+    // => mc 20/06/2022b : Fix integration tests (storie)
     // THEN
     final Ticket ticketReadingResult = ticketDAO.getTicket("ABCDEF");
-    assertThat(ticketReadingResult.getParkingSpot().getId() == 1);
-    assertThat(ticketReadingResult.getVehicleRegNumber() == "ABCDEF");
-    assertThat(ticketReadingResult.getPrice() != 0);
-    assertThat(ticketReadingResult.getInTime() != null);
-    assertThat(ticketReadingResult.getOutTime() != null);
+    assertThat(ticketReadingResult.getParkingSpot().getId()).isEqualTo(1);
+    assertThat(ticketReadingResult.getVehicleRegNumber()).isEqualTo("ABCDEF");
+    assertThat(ticketReadingResult.getPrice()).isZero();
+    assertThat(ticketReadingResult.getInTime()).isNotNull();
+    assertThat(ticketReadingResult.getOutTime()).isNotNull();
 
     final ParkingSpot parkingSpotReadingResult = parkingSpotDAO.getParkingSpot(1);
-    assertThat(parkingSpotReadingResult.getId() == 1);
-    assertThat(parkingSpotReadingResult.getParkingType() == ParkingType.CAR);
-    assertThat(parkingSpotReadingResult.isAvailable() == true);
+    assertThat(parkingSpotReadingResult.getId()).isEqualTo(1);
+    assertThat(parkingSpotReadingResult.getParkingType()).isEqualTo(ParkingType.CAR);
+    assertThat(parkingSpotReadingResult.isAvailable()).isTrue();
     // =< mc 20/06/2022b
   }
 

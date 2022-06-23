@@ -15,7 +15,7 @@ import com.parkit.parkingsystem.integration.config.DataBaseTestConfig;
 import com.parkit.parkingsystem.integration.service.DataBasePrepareService;
 import com.parkit.parkingsystem.model.ParkingSpot;
 
-// mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
+// mc 20/06/2022b : Fix integration tests (storie)
 @ExtendWith(MockitoExtension.class)
 public class ParkingSpotDAOIT {
 
@@ -47,16 +47,26 @@ public class ParkingSpotDAOIT {
   // ----------------------------------------------------------------------------------------------------
   // Method getNextAvailableSlot
   // ----------------------------------------------------------------------------------------------------
-  @ParameterizedTest(name = "{0} + {1}")
-  @MethodSource("listOfParkingTypeParametersToTest")
-  public void getNextAvailableSlot_shouldNextAvailableSlot(ParkingType arg1) throws Exception {
+  @Test
+  public void getNextAvailableSlot_shouldNextAvailableSlot_CAR() throws Exception {
     // GIVEN
-    parkingSpot = new ParkingSpot(1, arg1, true);
+    parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
     final boolean returnStatusUpdateParking = parkingSpotDAO.updateParking(parkingSpot);
     // WHEN
-    final int result = parkingSpotDAO.getNextAvailableSlot(arg1);
+    final int result = parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR);
     // THEN
-    assertThat(result == 1);
+    assertThat(result).isEqualTo(1);
+  }
+
+  @Test
+  public void getNextAvailableSlot_shouldNextAvailableSlot_BIKE() throws Exception {
+    // GIVEN
+    parkingSpot = new ParkingSpot(1, ParkingType.BIKE, true);
+    final boolean returnStatusUpdateParking = parkingSpotDAO.updateParking(parkingSpot);
+    // WHEN
+    final int result = parkingSpotDAO.getNextAvailableSlot(ParkingType.BIKE);
+    // THEN
+    assertThat(result).isEqualTo(4);
   }
 
 
@@ -85,7 +95,7 @@ public class ParkingSpotDAOIT {
   }
 
 
-  // => mc 20/06/2022b : Fix integration tests with "TODO" comments (stories TODO#2)
+  // => mc 20/06/2022b : Fix integration tests (storie)
   // ----------------------------------------------------------------------------------------------------
   // Method getParkingSpot
   // ----------------------------------------------------------------------------------------------------
@@ -95,7 +105,7 @@ public class ParkingSpotDAOIT {
     // WHEN
     final ParkingSpot result = parkingSpotDAO.getParkingSpot(0);
     // THEN
-    assertThat(result == null);
+    assertThat(result).isNull();
   }
 
   @Test
@@ -104,7 +114,7 @@ public class ParkingSpotDAOIT {
     // WHEN
     final ParkingSpot result = parkingSpotDAO.getParkingSpot(1);
     // THEN
-    assertThat(result.getId() == 1);
+    assertThat(result.getId()).isEqualTo(1);
   }
   // =< mc 20/06/2022b
 

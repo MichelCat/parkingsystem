@@ -18,7 +18,7 @@ import com.parkit.parkingsystem.constants.ParkingType;
 import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 
-// mc 20/06/2022c : Free 30-min parking (stories STORY#1)
+// mc 20/06/2022c : Free 30-min parking (storie)
 @ExtendWith(MockitoExtension.class)
 public class FareCalculatorServiceTest {
 
@@ -129,7 +129,7 @@ public class FareCalculatorServiceTest {
   }
 
 
-  // => mc 20/06/2022c : Free 30-min parking (stories STORY#1)
+  // => mc 20/06/2022c : Free 30-min parking (storie)
   // ----------------------------------------------------------------------------------------------------
   // Method calculateFare
   // Park for free when the user stays less than 30 minutes
@@ -146,7 +146,7 @@ public class FareCalculatorServiceTest {
     // WHEN
     fareCalculatorService.calculateFare(ticket);
     // THEN
-    assertThat(ticket.getPrice() > 0);
+    assertThat(ticket.getPrice()).isPositive();
   }
 
   @ParameterizedTest(name = "{0} + {1}")
@@ -161,7 +161,7 @@ public class FareCalculatorServiceTest {
     // WHEN
     fareCalculatorService.calculateFare(ticket);
     // THEN
-    assertThat(ticket.getPrice() == 0);
+    assertThat(ticket.getPrice()).isZero();
   }
 
   @ParameterizedTest(name = "{0} + {1}")
@@ -176,7 +176,7 @@ public class FareCalculatorServiceTest {
     // WHEN
     fareCalculatorService.calculateFare(ticket);
     // THEN
-    assertThat(ticket.getPrice() > 0);
+    assertThat(ticket.getPrice()).isPositive();
   }
   // =< mc 20/06/2022c
 

@@ -10,7 +10,7 @@ import com.parkit.parkingsystem.model.ParkingSpot;
 import com.parkit.parkingsystem.model.Ticket;
 import com.parkit.parkingsystem.util.InputReaderUtil;
 
-// mc 20/06/2022d : 5%-discount for recurring users
+// mc 20/06/2022d : 5%-discount for recurring users (storie)
 public class ParkingService {
 
   private static final Logger logger = LogManager.getLogger("ParkingService");
@@ -51,8 +51,8 @@ public class ParkingService {
         System.out.println("Please park your vehicle in spot number:" + parkingSpot.getId());
         System.out
             .println("Recorded in-time for vehicle number:" + vehicleRegNumber + " is:" + inTime);
-        // => mc 20/06/2022d : 5%-discount for recurring users
-        // 5% discount for repeat users
+        // => mc 20/06/2022d : 5%-discount for recurring users (storie)
+        // 5% discount for repeat users (storie)
         if (ticketDAO.getVehicleRecurrenceNumber(vehicleRegNumber) > 0) {
           System.out.println(
               "Welcome back! As a recurring user of our parking lot, you'll benefit from a 5% discount.");
@@ -114,7 +114,7 @@ public class ParkingService {
       Date outTime = new Date();
       ticket.setOutTime(outTime);
       fareCalculatorService.calculateFare(ticket);
-      // => mc 20/06/2022d : 5%-discount for recurring users
+      // => mc 20/06/2022d : 5%-discount for recurring users (storie)
       // 5% discount for repeat users
       if (ticketDAO.getVehicleRecurrenceNumber(vehicleRegNumber) > 0) {
         ticket.setPrice(ticket.getPrice() * 0.05); // 5% discount

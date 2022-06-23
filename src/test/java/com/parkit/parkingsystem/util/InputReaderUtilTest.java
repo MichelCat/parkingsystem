@@ -1,13 +1,12 @@
 package com.parkit.parkingsystem.util;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Scanner;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,7 +44,7 @@ public class InputReaderUtilTest {
     // WHEN
     final int result = inputReaderUtil.readSelection();
     // THEN
-    Assertions.assertTrue(result == 4);
+    assertThat(result).isEqualTo(4);
   }
 
   @Test
@@ -55,7 +54,7 @@ public class InputReaderUtilTest {
     // WHEN
     final int result = inputReaderUtil.readSelection();
     // THEN
-    assertTrue(result == -1);
+    assertThat(result).isEqualTo(-1);
   }
 
 
@@ -69,7 +68,7 @@ public class InputReaderUtilTest {
     // WHEN
     final String result = inputReaderUtil.readVehicleRegistrationNumber();
     // THEN
-    assertTrue(result == "ABCDEF");
+    assertThat(result).isEqualTo("ABCDEF");
   }
 
   @Test

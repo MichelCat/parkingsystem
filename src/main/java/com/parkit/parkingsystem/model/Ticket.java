@@ -70,25 +70,27 @@ public class Ticket {
       return false;
     if (!this.parkingSpot.equals(that.getParkingSpot()))
       return false;
-    if (this.vehicleRegNumber != that.getVehicleRegNumber())
-      return false;
     if (this.price != that.getPrice())
       return false;
 
-    // We test not test milliseconds
-    if ((this.getInTime() == null) && (that.getInTime() == null))
-      return true;
-    if ((this.getInTime() == null) || (that.getInTime() == null))
+    if ((this.vehicleRegNumber == null) ^ (that.getVehicleRegNumber() == null))
       return false;
-    if (this.getInTime().getTime() / 1000 != that.getInTime().getTime() / 1000)
+    if (this.vehicleRegNumber != null && that.getVehicleRegNumber() != null
+        && !this.vehicleRegNumber.equals(that.getVehicleRegNumber()))
       return false;
 
     // We test not test milliseconds
-    if ((this.getOutTime() == null) && (that.getOutTime() == null))
-      return true;
-    if ((this.getOutTime() == null) || (that.getOutTime() == null))
+    if ((this.inTime == null) ^ (that.getInTime() == null))
       return false;
-    if (this.getOutTime().getTime() / 1000 != that.getOutTime().getTime() / 1000)
+    if (this.inTime != null && that.getInTime() != null
+        && this.inTime.getTime() / 1000 != that.getInTime().getTime() / 1000)
+      return false;
+
+    // We test not test milliseconds
+    if ((this.outTime == null) ^ (that.getOutTime() == null))
+      return false;
+    if (this.outTime != null && that.getOutTime() != null
+        && this.outTime.getTime() / 1000 != that.getOutTime().getTime() / 1000)
       return false;
     return true;
   }

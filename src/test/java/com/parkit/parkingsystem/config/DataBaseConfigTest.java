@@ -71,6 +71,7 @@ public class DataBaseConfigTest {
     // WHEN
     dataBaseConfig.closeConnection(connection);
     // THEN
+    verify(connection, Mockito.times(1)).close();
   }
 
 
@@ -103,6 +104,7 @@ public class DataBaseConfigTest {
     // WHEN
     dataBaseConfig.closePreparedStatement(preparedStatement);
     // THEN
+    verify(preparedStatement, Mockito.times(1)).close();
   }
 
 
@@ -134,5 +136,6 @@ public class DataBaseConfigTest {
     // WHEN
     dataBaseConfig.closeResultSet(resultSet);
     // THEN
+    verify(resultSet, Mockito.times(1)).close();
   }
 }

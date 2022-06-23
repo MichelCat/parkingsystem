@@ -1,6 +1,6 @@
 package com.parkit.parkingsystem.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import com.parkit.parkingsystem.constants.ParkingType;
@@ -19,7 +19,7 @@ class ParkingSpotTest {
   // ----------------------------------------------------------------------------------------------------
   @Test
   public void getId_shouldReturnsNumber() {
-    assertEquals(parkingSpot.getId(), 1);
+    assertThat(parkingSpot.getId()).isEqualTo(1);
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ class ParkingSpotTest {
   @Test
   public void setId_writeNumber() {
     parkingSpot.setId(2);
-    assertEquals(parkingSpot.getId(), 2);
+    assertThat(parkingSpot.getId()).isEqualTo(2);
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ class ParkingSpotTest {
   // ----------------------------------------------------------------------------------------------------
   @Test
   public void getParkingType_shouldReturnsParkingType() {
-    assertEquals(parkingSpot.getParkingType(), ParkingType.CAR);
+    assertThat(parkingSpot.getParkingType()).isEqualTo(ParkingType.CAR);
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ class ParkingSpotTest {
   @Test
   public void setParkingType_writeParkingType() {
     parkingSpot.setParkingType(ParkingType.BIKE);
-    assertEquals(parkingSpot.getParkingType(), ParkingType.BIKE);
+    assertThat(parkingSpot.getParkingType()).isEqualTo(ParkingType.BIKE);
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ class ParkingSpotTest {
   // ----------------------------------------------------------------------------------------------------
   @Test
   public void isAvailable_shouldReturnsIsAvailable() {
-    assertEquals(parkingSpot.isAvailable(), false);
+    assertThat(parkingSpot.isAvailable()).isFalse();
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ class ParkingSpotTest {
   @Test
   public void setAvailable_writeIsAvailable() {
     parkingSpot.setAvailable(true);
-    assertEquals(parkingSpot.isAvailable(), true);
+    assertThat(parkingSpot.isAvailable()).isTrue();
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -70,31 +70,32 @@ class ParkingSpotTest {
   // ----------------------------------------------------------------------------------------------------
   @Test
   public void equals_shouldReturnsIsAvailable_identicalParkingSpot() {
-    assertEquals(parkingSpot.equals(parkingSpot), true);
+    assertThat(parkingSpot.equals(parkingSpot)).isTrue();
   }
 
   @Test
   public void equals_shouldReturnsIsAvailable_equalParkingSpot() {
     ParkingSpot parkingSpotToTest = new ParkingSpot(1, ParkingType.CAR, false);
-    assertEquals(parkingSpot.equals(parkingSpotToTest), true);
+    assertThat(parkingSpot.equals(parkingSpotToTest)).isTrue();
   }
 
   @Test
   public void equals_shouldReturnsIsAvailable_notEqualParkingSpot() {
     ParkingSpot parkingSpotToTest = new ParkingSpot(2, ParkingType.CAR, false);
-    assertEquals(parkingSpot.equals(parkingSpotToTest), false);
+    assertThat(parkingSpot.equals(parkingSpotToTest)).isFalse();
   }
 
   @Test
   public void equals_shouldReturnsIsAvailable_nullParkingSpot() {
     ParkingSpot parkingSpotToTest = null;
-    assertEquals(parkingSpot.equals(parkingSpotToTest), false);
+    assertThat(parkingSpot.equals(parkingSpotToTest)).isFalse();
+
   }
 
   @Test
   public void equals_shouldReturnsIsAvailable_differentParkingSpot() {
     Ticket ticket = new Ticket();
-    assertEquals(parkingSpot.equals(ticket), false);
+    assertThat(parkingSpot.equals(ticket)).isFalse();
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -102,7 +103,7 @@ class ParkingSpotTest {
   // ----------------------------------------------------------------------------------------------------
   @Test
   public void hashCode_shouldReturnsNumber() {
-    assertEquals(parkingSpot.hashCode(), 1);
+    assertThat(parkingSpot.hashCode()).isEqualTo(1);
   }
 
 
