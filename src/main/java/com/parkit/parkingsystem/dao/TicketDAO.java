@@ -3,7 +3,6 @@ package com.parkit.parkingsystem.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.parkit.parkingsystem.config.DataBaseConfig;
@@ -26,16 +25,8 @@ public class TicketDAO {
         ps.setInt(1, ticket.getParkingSpot().getId());
         ps.setString(2, ticket.getVehicleRegNumber());
         ps.setDouble(3, ticket.getPrice());
-
-        // ps.setTimestamp(4, new Timestamp(ticket.getInTime().getTime()));
-        ps.setTimestamp(4, new Timestamp((ticket.getInTime().getTime() / 1000) * 1000));
-        // ps.setDate(4, new java.sql.Date(ticket.getInTime().getTime()));
-
-        // ps.setTimestamp(5,
-        // (ticket.getOutTime() == null) ? null : (new Timestamp(ticket.getOutTime().getTime())));
-        ps.setTimestamp(5, (ticket.getOutTime() == null) ? null
-            : (new Timestamp((ticket.getOutTime().getTime() / 1000) * 1000)));
-
+        ps.setTimestamp(4, ConversionDAO.dateToTimestampWithoutMilliseconds(ticket.getInTime()));
+        ps.setTimestamp(5, ConversionDAO.dateToTimestampWithoutMilliseconds(ticket.getOutTime()));
         return (ps.executeUpdate() == 1);
       }
     } catch (Exception ex) {
@@ -74,10 +65,7 @@ public class TicketDAO {
     try (Connection con = dataBaseConfig.getConnection()) {
       try (PreparedStatement ps = con.prepareStatement(DBConstants.UPDATE_TICKET)) {
         ps.setDouble(1, ticket.getPrice());
-
-        // ps.setTimestamp(2, new Timestamp(ticket.getOutTime().getTime()));
-        ps.setTimestamp(2, new Timestamp((ticket.getOutTime().getTime() / 1000) * 1000));
-
+        ps.setTimestamp(2, ConversionDAO.dateToTimestampWithoutMilliseconds(ticket.getOutTime()));
         ps.setInt(3, ticket.getId());
         return (ps.executeUpdate() == 1);
       }

@@ -2,6 +2,9 @@
 create database prod;
 use prod;
 
+drop table if exists ticket;
+drop table if exists parking;
+
 create table parking(
 PARKING_NUMBER int PRIMARY KEY,
 AVAILABLE bool NOT NULL,
@@ -16,7 +19,8 @@ create table ticket(
  IN_TIME DATETIME NOT NULL,
  OUT_TIME DATETIME,
  FOREIGN KEY (PARKING_NUMBER)
- REFERENCES parking(PARKING_NUMBER));
+ REFERENCES parking(PARKING_NUMBER)
+ on delete CASCADE);
 
 insert into parking(PARKING_NUMBER,AVAILABLE,TYPE) values(1,true,'CAR');
 insert into parking(PARKING_NUMBER,AVAILABLE,TYPE) values(2,true,'CAR');
@@ -29,6 +33,9 @@ commit;
 create database test;
 use test;
 
+drop table if exists ticket;
+drop table if exists parking;
+
 create table parking(
 PARKING_NUMBER int PRIMARY KEY,
 AVAILABLE bool NOT NULL,
@@ -43,7 +50,8 @@ create table ticket(
  IN_TIME DATETIME NOT NULL,
  OUT_TIME DATETIME,
  FOREIGN KEY (PARKING_NUMBER)
- REFERENCES parking(PARKING_NUMBER));
+ REFERENCES parking(PARKING_NUMBER)
+ on delete CASCADE);
 
 insert into parking(PARKING_NUMBER,AVAILABLE,TYPE) values(1,true,'CAR');
 insert into parking(PARKING_NUMBER,AVAILABLE,TYPE) values(2,true,'CAR');

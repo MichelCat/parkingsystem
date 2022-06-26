@@ -1,6 +1,7 @@
 package com.parkit.parkingsystem.model;
 
 import java.util.Date;
+import com.parkit.parkingsystem.dao.ConversionDAO;
 
 // mc 20/06/2022a : Add test compare ticket
 public class Ticket {
@@ -75,23 +76,23 @@ public class Ticket {
 
     if ((this.vehicleRegNumber == null) ^ (that.getVehicleRegNumber() == null))
       return false;
-    if (this.vehicleRegNumber != null && that.getVehicleRegNumber() != null
-        && !this.vehicleRegNumber.equals(that.getVehicleRegNumber()))
+    if (this.vehicleRegNumber != null && !this.vehicleRegNumber.equals(that.getVehicleRegNumber()))
       return false;
 
     // We test not test milliseconds
     if ((this.inTime == null) ^ (that.getInTime() == null))
       return false;
-    if (this.inTime != null && that.getInTime() != null
-        && this.inTime.getTime() / 1000 != that.getInTime().getTime() / 1000)
+    if (this.inTime != null && !ConversionDAO.dateToTimestampWithoutMilliseconds(this.inTime)
+        .equals(ConversionDAO.dateToTimestampWithoutMilliseconds(that.getInTime())))
       return false;
 
     // We test not test milliseconds
     if ((this.outTime == null) ^ (that.getOutTime() == null))
       return false;
-    if (this.outTime != null && that.getOutTime() != null
-        && this.outTime.getTime() / 1000 != that.getOutTime().getTime() / 1000)
+    if (this.outTime != null && !ConversionDAO.dateToTimestampWithoutMilliseconds(this.outTime)
+        .equals(ConversionDAO.dateToTimestampWithoutMilliseconds(that.getOutTime())))
       return false;
+
     return true;
   }
   // =< mc 20/06/2022a

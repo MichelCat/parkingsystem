@@ -52,8 +52,6 @@ public class ParkingSpotDAOIT {
   @DisplayName("Next available car slot, retun one")
   public void getNextAvailableSlot_nextAvailableCarSlot_returnOne() {
     // GIVEN
-    parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
-    final boolean returnStatusUpdateParking = parkingSpotDAO.updateParking(parkingSpot);
     // WHEN
     final int result = parkingSpotDAO.getNextAvailableSlot(ParkingType.CAR);
     // THEN
@@ -64,8 +62,6 @@ public class ParkingSpotDAOIT {
   @DisplayName("Next available bike slot, return four")
   public void getNextAvailableSlot_nextAvailableBikeSlot_returnFour() {
     // GIVEN
-    parkingSpot = new ParkingSpot(4, ParkingType.BIKE, true);
-    final boolean returnStatusUpdateParking = parkingSpotDAO.updateParking(parkingSpot);
     // WHEN
     final int result = parkingSpotDAO.getNextAvailableSlot(ParkingType.BIKE);
     // THEN
