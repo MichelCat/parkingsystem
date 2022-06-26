@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -53,6 +54,7 @@ public class ParkingDataBaseIT {
   }
 
   @Test
+  @DisplayName("Book parking")
   public void testParkingACar() {
     ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
     parkingService.processIncomingVehicle();
@@ -73,6 +75,7 @@ public class ParkingDataBaseIT {
   }
 
   @Test
+  @DisplayName("Book and free parking")
   public void testParkingLotExit() {
     // => mc 20/06/2022b : Fix integration tests (storie)
     // testParkingACar();

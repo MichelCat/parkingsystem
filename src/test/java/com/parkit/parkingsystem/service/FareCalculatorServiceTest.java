@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -56,6 +57,7 @@ public class FareCalculatorServiceTest {
   // ----------------------------------------------------------------------------------------------------
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
+  @DisplayName("Parking price calculation")
   public void calculateFareCarBike(ParkingType arg1, double arg2) {
     // GIVEN
     inTime.setTime(currentTime - (60 * 60 * 1000));
@@ -70,6 +72,7 @@ public class FareCalculatorServiceTest {
   }
 
   @Test
+  @DisplayName("Parking price calculation with unknown type")
   public void calculateFareUnkownType() {
     // GIVEN
     inTime.setTime(currentTime - (60 * 60 * 1000));
@@ -83,6 +86,7 @@ public class FareCalculatorServiceTest {
   }
 
   @Test
+  @DisplayName("Parking price calculation with time input greater than time output")
   public void calculateFareBikeWithFutureInTime() {
     // GIVEN
     inTime.setTime(currentTime + (60 * 60 * 1000));
@@ -97,6 +101,7 @@ public class FareCalculatorServiceTest {
 
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
+  @DisplayName("Parking price calculation with 45 minutes parking time")
   public void calculateFareWithLessThanOneHourParkingTime(ParkingType arg1, double arg2) {
     // GIVEN
     inTime.setTime(currentTime - (45 * 60 * 1000));// 45 minutes parking time should
@@ -113,6 +118,7 @@ public class FareCalculatorServiceTest {
 
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
+  @DisplayName("Parking price calculation with 24 hours parking time")
   public void calculateFareCarWithMoreThanADayParkingTime(ParkingType arg1, double arg2) {
     // GIVEN
     inTime.setTime(currentTime - (24 * 60 * 60 * 1000));// 24 hours parking time
@@ -136,6 +142,7 @@ public class FareCalculatorServiceTest {
   // ----------------------------------------------------------------------------------------------------
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
+  @DisplayName("Parking price calculation with 30 minutes parking time")
   public void calculateFare_when30Minutes00secondesCarBike(ParkingType arg1, double arg2) {
     // GIVEN
     inTime.setTime(currentTime - (30 * 60 * 1000));
@@ -151,6 +158,7 @@ public class FareCalculatorServiceTest {
 
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
+  @DisplayName("Parking price calculation with 29 minutes 59 secondes parking time")
   public void calculateFare_when29Minutes59secondesCarBike(ParkingType arg1, double arg2) {
     // GIVEN
     inTime.setTime(currentTime - (30 * 60 - 1) * 1000);
@@ -166,6 +174,7 @@ public class FareCalculatorServiceTest {
 
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
+  @DisplayName("Parking price calculation with 30 minutes 01 secondes parking time")
   public void calculateFare_when30Minutes01secondesCarBike(ParkingType arg1, double arg2) {
     // GIVEN
     inTime.setTime(currentTime - (30 * 60 + 1) * 1000);

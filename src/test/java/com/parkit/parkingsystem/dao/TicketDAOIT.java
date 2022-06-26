@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Date;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -51,7 +52,8 @@ public class TicketDAOIT {
   // Method saveTicket
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void saveTicket_shouldNull_ofTicket() throws Exception {
+  @DisplayName("Save null ticket, return false")
+  public void saveTicket_nNullTicket_returnFalse() {
     // GIVEN
     ticket = null;
     // WHEN
@@ -61,12 +63,14 @@ public class TicketDAOIT {
   }
 
   @Test
-  public void saveTicket_shouldCreateTicket() throws Exception {
+  @DisplayName("Save ticket, return true")
+  public void saveTicket_saveTicket_returnTrue() {
     // GIVEN
     // WHEN
     final boolean result = ticketDAO.saveTicket(ticket);
     // THEN
-    assertThat(result).isFalse();
+    assertThat(result).isTrue();
+    assertThat(ticket.compare(ticketDAO.getTicket("ABCDEF"))).isTrue();
   }
 
 
@@ -74,7 +78,8 @@ public class TicketDAOIT {
   // Method getTicket
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getTicket_shouldNullString_ofVehicleRegNumber() throws Exception {
+  @DisplayName("Search null vehicle registration number, return null")
+  public void getTicket_nullVehicleRegistrationNumber_returnNull() {
     // GIVEN
     String vehicleRegNumber = null;
     // WHEN
@@ -84,12 +89,14 @@ public class TicketDAOIT {
   }
 
   @Test
-  public void getTicket_shouldReadTicket() throws Exception {
+  @DisplayName("Search vehicle registration number, return last ticket")
+  public void getTicket_vehicleRegistrationNumber_returnLastTicket() {
     // GIVEN
     final boolean returnStatusSaveTicket = ticketDAO.saveTicket(ticket);
     // WHEN
     final Ticket ticketReadingResult = ticketDAO.getTicket("ABCDEF");
     // THEN
+    assertThat(returnStatusSaveTicket).isTrue();
     assertThat(ticket.compare(ticketReadingResult)).isTrue();
   }
 
@@ -98,7 +105,8 @@ public class TicketDAOIT {
   // Method updateTicket
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void updateTicket_shouldNull_ofTicket() throws Exception {
+  @DisplayName("Update null ticket, return null")
+  public void updateTicket_nullUpdateTicket_returnNull() {
     // GIVEN
     ticket = null;
     // WHEN
@@ -108,7 +116,8 @@ public class TicketDAOIT {
   }
 
   @Test
-  public void updateTicket_shouldUpdateTicket() throws Exception {
+  @DisplayName("Update ticket, return true")
+  public void updateTicket_updateTicket_returnTrue() {
     // GIVEN
     final boolean returnStatusSaveTicket = ticketDAO.saveTicket(ticket);
     ticket.setPrice(10);
@@ -117,37 +126,34 @@ public class TicketDAOIT {
     // WHEN
     final boolean result = ticketDAO.updateTicket(ticket);
     // THEN
-    final Ticket ticketReadingResult = ticketDAO.getTicket("ABCDEF");
-    assertThat(ticket.compare(ticketReadingResult)).isTrue();
+    assertThat(result).isTrue();
+    assertThat(ticket.compare(ticketDAO.getTicket("ABCDEF"))).isTrue();
   }
 
 
   // => mc 20/06/2022d : 5%-discount for recurring users (storie)
   // ----------------------------------------------------------------------------------------------------
-  // Method getVehicleRecurrenceNumber
+  // Method getVehicleRecurrenceNumberOutput
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getVehicleRecurrenceNumber_shouldNullString_ofVehicleRegNumber() throws Exception {
+  @DisplayName("Search null vehicle registration number output, return zero")
+  public void getVehicleRecurrenceNumberOutput_nullVehicleRegistrationNumber_returnZero() {
     // GIVEN
     String vehicleRegNumber = null;
     // WHEN
-    final int result = ticketDAO.getVehicleRecurrenceNumber(vehicleRegNumber);
+    final int result = ticketDAO.getVehicleRecurrenceNumberOutput(vehicleRegNumber);
     // THEN
     assertThat(result).isZero();
   }
 
   @Test
-  public void getVehicleRecurrenceNumber_shouldReadTicket() throws Exception {
+  @DisplayName("Search vehicle registration number Output, return recurrence number")
+  public void getVehicleRecurrenceNumberOutput_vehicleRegistrationNumberExit_returnRecurrenceNumber() {
     // GIVEN
-    ticket.setInTime(new Date());
     ticket.setOutTime(new Date());
-    final boolean returnStatusSaveTicket1 = ticketDAO.saveTicket(ticket);
-
-    ticket.setInTime(new Date());
-    ticket.setOutTime(null);
-    final boolean returnStatusSaveTicket2 = ticketDAO.saveTicket(ticket);
+    final boolean returnStatusSaveTicket = ticketDAO.saveTicket(ticket);
     // WHEN
-    final int ticketReadingResult = ticketDAO.getVehicleRecurrenceNumber("ABCDEF");
+    final int ticketReadingResult = ticketDAO.getVehicleRecurrenceNumberOutput("ABCDEF");
     // THEN
     assertThat(ticketReadingResult).isEqualTo(1);
   }

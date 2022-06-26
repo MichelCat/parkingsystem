@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -48,7 +49,8 @@ public class ParkingSpotDAOIT {
   // Method getNextAvailableSlot
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getNextAvailableSlot_shouldNextAvailableSlot_CAR() throws Exception {
+  @DisplayName("Next available car slot, retun one")
+  public void getNextAvailableSlot_nextAvailableCarSlot_returnOne() {
     // GIVEN
     parkingSpot = new ParkingSpot(1, ParkingType.CAR, true);
     final boolean returnStatusUpdateParking = parkingSpotDAO.updateParking(parkingSpot);
@@ -59,9 +61,10 @@ public class ParkingSpotDAOIT {
   }
 
   @Test
-  public void getNextAvailableSlot_shouldNextAvailableSlot_BIKE() throws Exception {
+  @DisplayName("Next available bike slot, return four")
+  public void getNextAvailableSlot_nextAvailableBikeSlot_returnFour() {
     // GIVEN
-    parkingSpot = new ParkingSpot(1, ParkingType.BIKE, true);
+    parkingSpot = new ParkingSpot(4, ParkingType.BIKE, true);
     final boolean returnStatusUpdateParking = parkingSpotDAO.updateParking(parkingSpot);
     // WHEN
     final int result = parkingSpotDAO.getNextAvailableSlot(ParkingType.BIKE);
@@ -75,17 +78,20 @@ public class ParkingSpotDAOIT {
   // ----------------------------------------------------------------------------------------------------
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
-  public void updateParking_shouldUpdateParking(ParkingType arg1) throws Exception {
+  @DisplayName("Update parking, return true")
+  public void updateParking_updateParking_returnTrue(ParkingType arg1) {
     // GIVEN
     parkingSpot = new ParkingSpot(1, arg1, false);
     // WHEN
     final boolean result = parkingSpotDAO.updateParking(parkingSpot);
     // THEN
     assertThat(result).isTrue();
+    assertThat(parkingSpotDAO.getParkingSpot(parkingSpot.getId())).isEqualTo(parkingSpot);
   }
 
   @Test
-  public void updateParking_shouldNull_ofParkingSpot() throws Exception {
+  @DisplayName("Update null parking, return false")
+  public void updateParking_nullParkingSpot_returnFalse() {
     // GIVEN
     parkingSpot = null;
     // WHEN
@@ -100,7 +106,8 @@ public class ParkingSpotDAOIT {
   // Method getParkingSpot
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getParkingSpot_shouldZero_ofParkingType() {
+  @DisplayName("Search parking number zero, return null ParkingSpot")
+  public void getParkingSpot_parkingNumberZero_returnNullParkingSpot() {
     // GIVEN
     // WHEN
     final ParkingSpot result = parkingSpotDAO.getParkingSpot(0);
@@ -109,7 +116,8 @@ public class ParkingSpotDAOIT {
   }
 
   @Test
-  public void getParkingSpot_shouldParkingType() {
+  @DisplayName("Search parking number one, return first ParkingSpot")
+  public void getParkingSpot_parkingNumberOne_returnFirstParkingSpot() {
     // GIVEN
     // WHEN
     final ParkingSpot result = parkingSpotDAO.getParkingSpot(1);

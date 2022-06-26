@@ -8,6 +8,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -38,7 +39,8 @@ public class InputReaderUtilTest {
   // Method readSelection
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void readSelection_shouldReturnInt() {
+  @DisplayName("Read integer 4")
+  public void readSelection_readFour_returnFour() {
     // GIVEN
     when(scanner.nextLine()).thenReturn("4");
     // WHEN
@@ -48,7 +50,8 @@ public class InputReaderUtilTest {
   }
 
   @Test
-  public void readSelection_shoulThrowdExceptionWithEmptyString() {
+  @DisplayName("Exception on read empty string")
+  public void readSelection_throwdExceptionWithEmptyString() {
     // GIVEN
     when(scanner.nextLine()).thenReturn("");
     // WHEN
@@ -62,7 +65,8 @@ public class InputReaderUtilTest {
   // Method readVehicleRegistrationNumber
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void readVehicleRegistrationNumber_shouldReturnString() throws Exception {
+  @DisplayName("Read string ABCDEF")
+  public void readVehicleRegistrationNumber_readString_returnString() throws Exception {
     // GIVEN
     when(scanner.nextLine()).thenReturn("ABCDEF");
     // WHEN
@@ -72,7 +76,8 @@ public class InputReaderUtilTest {
   }
 
   @Test
-  public void readVehicleRegistrationNumber_shoulThrowdExceptionWithNull() throws Exception {
+  @DisplayName("Exception on read null string")
+  public void readVehicleRegistrationNumber_throwdExceptionWithNull() throws Exception {
     // GIVEN
     when(scanner.nextLine()).thenReturn(null);
     // WHEN
@@ -81,7 +86,8 @@ public class InputReaderUtilTest {
   }
 
   @Test
-  public void readVehicleRegistrationNumber_shouldThrowExceptionWithEmptyString() throws Exception {
+  @DisplayName("Exception on read empty string")
+  public void readVehicleRegistrationNumber_throwExceptionWithEmptyString() throws Exception {
     // GIVEN
     when(scanner.nextLine()).thenReturn("");
     // WHEN

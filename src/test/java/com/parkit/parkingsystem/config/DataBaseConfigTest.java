@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -42,11 +43,11 @@ public class DataBaseConfigTest {
   // ----------------------------------------------------------------------------------------------------
 
 
-
   // ----------------------------------------------------------------------------------------------------
   // Method closeConnection
   // ----------------------------------------------------------------------------------------------------
   @Test
+  @DisplayName("Closing a database connection")
   public void closeConnection_shouldCloseConnection() throws SQLException {
     // GIVEN
     // WHEN
@@ -56,7 +57,8 @@ public class DataBaseConfigTest {
   }
 
   @Test
-  public void closeConnection_shouldNull_ofConnection() throws SQLException {
+  @DisplayName("Closing null connection")
+  public void closeConnection_closingNullConnection() throws SQLException {
     // GIVEN
     // WHEN
     dataBaseConfig.closeConnection(null);
@@ -65,7 +67,8 @@ public class DataBaseConfigTest {
   }
 
   @Test
-  public void closeConnection_shouldThrowSQLException_ofConnection() throws SQLException {
+  @DisplayName("SQLException error closing connection")
+  public void closeConnection_throwSQLExceptionClosingConnection() throws SQLException {
     // GIVEN
     doThrow(new SQLException()).when(connection).close();
     // WHEN
@@ -79,7 +82,8 @@ public class DataBaseConfigTest {
   // Method closePreparedStatement
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void closePreparedStatement_shouldPreparedStatement() throws SQLException {
+  @DisplayName("Closing PreparedStatement")
+  public void closePreparedStatement_shouldClosePreparedStatement() throws SQLException {
     // GIVEN
     // WHEN
     dataBaseConfig.closePreparedStatement(preparedStatement);
@@ -88,7 +92,8 @@ public class DataBaseConfigTest {
   }
 
   @Test
-  public void closePreparedStatement_shouldNull_ofPreparedStatement() throws SQLException {
+  @DisplayName("Closing null PreparedStatement")
+  public void closePreparedStatement_closingNullPreparedStatement() throws SQLException {
     // GIVEN
     // WHEN
     dataBaseConfig.closePreparedStatement(null);
@@ -97,7 +102,8 @@ public class DataBaseConfigTest {
   }
 
   @Test
-  public void closePreparedStatement_shouldThrowSQLException_ofPreparedStatement()
+  @DisplayName("SQLException error closing PreparedStatement")
+  public void closePreparedStatement_throwSQLExceptionClosingPreparedStatement()
       throws SQLException {
     // GIVEN
     doThrow(new SQLException()).when(preparedStatement).close();
@@ -112,6 +118,7 @@ public class DataBaseConfigTest {
   // Method closeResultSet
   // ----------------------------------------------------------------------------------------------------
   @Test
+  @DisplayName("Closing ResultSet")
   public void closeResultSet_shouldCloseResultSet() throws SQLException {
     // GIVEN
     // WHEN
@@ -121,7 +128,8 @@ public class DataBaseConfigTest {
   }
 
   @Test
-  public void closeResultSet_shouldNull_ofResultSet() throws SQLException {
+  @DisplayName("Closing null ResultSet")
+  public void closeResultSet_closingdNullResultSet() throws SQLException {
     // GIVEN
     // WHEN
     dataBaseConfig.closeResultSet(null);
@@ -130,7 +138,8 @@ public class DataBaseConfigTest {
   }
 
   @Test
-  public void closeResultSet_shouldThrowSQLException_ofResultSet() throws SQLException {
+  @DisplayName("SQLException error closing ResultSet")
+  public void closeResultSet_throwSQLExceptionClosingResultSet() throws SQLException {
     // GIVEN
     doThrow(new SQLException()).when(resultSet).close();
     // WHEN

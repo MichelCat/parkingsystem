@@ -40,7 +40,6 @@ public class ParkingService {
         Date inTime = new Date();
         Ticket ticket = new Ticket();
         // ID, PARKING_NUMBER, VEHICLE_REG_NUMBER, PRICE, IN_TIME, OUT_TIME)
-        // ticket.setId(ticketID);
         ticket.setParkingSpot(parkingSpot);
         ticket.setVehicleRegNumber(vehicleRegNumber);
         ticket.setPrice(0);
@@ -53,7 +52,7 @@ public class ParkingService {
             .println("Recorded in-time for vehicle number:" + vehicleRegNumber + " is:" + inTime);
         // => mc 20/06/2022d : 5%-discount for recurring users (storie)
         // 5% discount for repeat users (storie)
-        if (ticketDAO.getVehicleRecurrenceNumber(vehicleRegNumber) > 0) {
+        if (ticketDAO.getVehicleRecurrenceNumberOutput(vehicleRegNumber) > 0) {
           System.out.println(
               "Welcome back! As a recurring user of our parking lot, you'll benefit from a 5% discount.");
         }
@@ -116,7 +115,7 @@ public class ParkingService {
       fareCalculatorService.calculateFare(ticket);
       // => mc 20/06/2022d : 5%-discount for recurring users (storie)
       // 5% discount for repeat users
-      if (ticketDAO.getVehicleRecurrenceNumber(vehicleRegNumber) > 0) {
+      if (ticketDAO.getVehicleRecurrenceNumberOutput(vehicleRegNumber) > 0) {
         ticket.setPrice(ticket.getPrice() * 0.05); // 5% discount
       }
       // =< mc 20/06/2022d

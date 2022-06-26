@@ -3,6 +3,7 @@ package com.parkit.parkingsystem.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import com.parkit.parkingsystem.constants.ParkingType;
 
@@ -29,7 +30,8 @@ class TicketTest {
   // Method getId
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getId_shouldReturnsId() {
+  @DisplayName("Read identity ticket")
+  public void getId_returnIdentityTicket() {
     assertEquals(ticket.getId(), 1);
   }
 
@@ -37,7 +39,8 @@ class TicketTest {
   // Method setId
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void setId_writeId() {
+  @DisplayName("Write identity ticket")
+  public void setId_writeIdentityTicket() {
     ticket.setId(2);
     assertEquals(ticket.getId(), 2);
   }
@@ -46,7 +49,8 @@ class TicketTest {
   // Method getParkingSpot
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getParkingSpot_shouldReturnsParkingSpot() {
+  @DisplayName("Read ParkingSpot")
+  public void getParkingSpot_returnParkingSpot() {
     assertEquals(ticket.getParkingSpot(), parkingSpot);
   }
 
@@ -54,6 +58,7 @@ class TicketTest {
   // Method setParkingSpot
   // ----------------------------------------------------------------------------------------------------
   @Test
+  @DisplayName("Write ParkingSpot")
   public void setParkingSpot_writeParkingSpot() {
     ParkingSpot parkingSpotToTest = new ParkingSpot(2, ParkingType.CAR, false);
     ticket.setParkingSpot(parkingSpotToTest);
@@ -64,7 +69,8 @@ class TicketTest {
   // Method getVehicleRegNumber
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getVehicleRegNumber_shouldReturnsVehicleRegNumber() {
+  @DisplayName("Read vehicle registration number")
+  public void getVehicleRegNumber_returnVehicleRegistrationNumber() {
     assertEquals(ticket.getVehicleRegNumber(), "ABCDEF");
   }
 
@@ -72,7 +78,8 @@ class TicketTest {
   // Method setVehicleRegNumber
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void setVehicleRegNumber_writeVehicleRegNumber() {
+  @DisplayName("Write vehicle registration number")
+  public void setVehicleRegNumber_writeVehicleRegistrationNumber() {
     ticket.setVehicleRegNumber("123456");
     assertEquals(ticket.getVehicleRegNumber(), "123456");
   }
@@ -81,7 +88,8 @@ class TicketTest {
   // Method getPrice
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getPrice_shouldReturnsPrice() {
+  @DisplayName("Read price")
+  public void getPrice_returnPrice() {
     assertEquals(ticket.getPrice(), 0);
   }
 
@@ -89,6 +97,7 @@ class TicketTest {
   // Method setPrice
   // ----------------------------------------------------------------------------------------------------
   @Test
+  @DisplayName("Write price")
   public void setPrice_writePrice() {
     ticket.setPrice(89.0);
     assertEquals(ticket.getPrice(), 89.0);
@@ -98,7 +107,8 @@ class TicketTest {
   // Method getInTime
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getInTime_shouldReturnsInTime() {
+  @DisplayName("Read input time")
+  public void getInTime_returnInputTime() {
     assertEquals(ticket.getInTime(), currentTime);
   }
 
@@ -106,8 +116,9 @@ class TicketTest {
   // Method setInTime
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void setInTime_writeInTime() {
-    Date currentTimeTest = new Date(System.currentTimeMillis() + 1000);
+  @DisplayName("Write input time")
+  public void setInTime_writeInputTime() {
+    Date currentTimeTest = new Date(System.currentTimeMillis());
     ticket.setInTime(currentTimeTest);
     assertEquals(ticket.getInTime(), currentTimeTest);
   }
@@ -116,7 +127,8 @@ class TicketTest {
   // Method getOutTime
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void getOutTime_shouldReturnsOutTime() {
+  @DisplayName("Read output time")
+  public void getOutTime_returnOutputTime() {
     assertEquals(ticket.getOutTime(), currentTime);
   }
 
@@ -124,8 +136,9 @@ class TicketTest {
   // Method setOutTime
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void setOutTime_writeOutTime() {
-    Date currentTimeTest = new Date(System.currentTimeMillis() + 1000);
+  @DisplayName("Write output time")
+  public void setOutTime_writeOutputTime() {
+    Date currentTimeTest = new Date(System.currentTimeMillis());
     ticket.setOutTime(currentTimeTest);
     assertEquals(ticket.getOutTime(), currentTimeTest);
   }

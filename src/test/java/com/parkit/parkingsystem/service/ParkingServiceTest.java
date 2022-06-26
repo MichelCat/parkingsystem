@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import java.util.Date;
 import java.util.stream.Stream;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -44,8 +45,8 @@ public class ParkingServiceTest {
   // ----------------------------------------------------------------------------------------------------
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
-  public void processIncomingVehicle_shouldBookParking(int arg1, ParkingType arg2)
-      throws Exception {
+  @DisplayName("Book parking")
+  public void processIncomingVehicle_BookParking(int arg1, ParkingType arg2) throws Exception {
     // GIVEN
     when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
     when(inputReaderUtil.readSelection()).thenReturn(arg1);
@@ -59,8 +60,9 @@ public class ParkingServiceTest {
 
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
-  public void processIncomingVehicle_shouldThrowIllegalArgumentException_ofRegistrationNumber(
-      int arg1, ParkingType arg2) throws Exception {
+  @DisplayName("IllegalArgumentException on reading vehicle registration number")
+  public void processIncomingVehicle_throwIllegalArgumentException_ofRegistrationNumber(int arg1,
+      ParkingType arg2) throws Exception {
     // GIVEN
     when(inputReaderUtil.readVehicleRegistrationNumber()).thenThrow(new IllegalArgumentException());
     when(inputReaderUtil.readSelection()).thenReturn(arg1);
@@ -74,8 +76,9 @@ public class ParkingServiceTest {
 
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
-  public void processIncomingVehicle_shouldThrowException_ofRegistrationNumber(int arg1,
-      ParkingType arg2) throws Exception {
+  @DisplayName("Exception on reading vehicle registration number")
+  public void processIncomingVehicle_throwException_ofRegistrationNumber(int arg1, ParkingType arg2)
+      throws Exception {
     // GIVEN
     when(inputReaderUtil.readVehicleRegistrationNumber()).thenThrow(new Exception());
     when(inputReaderUtil.readSelection()).thenReturn(arg1);
@@ -88,7 +91,8 @@ public class ParkingServiceTest {
   }
 
   @Test
-  public void processIncomingVehicle_shouldNull_ofParkingNumber() {
+  @DisplayName("IllegalArgumentException on reading zero parking number")
+  public void processIncomingVehicle_zeroParkingNumber() {
     // GIVEN
     when(inputReaderUtil.readSelection()).thenReturn(0);
     ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
@@ -100,6 +104,7 @@ public class ParkingServiceTest {
 
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
+  @DisplayName("Exception on parking number with value -1")
   public void processIncomingVehicle_incorrectReading_ofParkingNumber(int arg1, ParkingType arg2)
       throws Exception {
     // GIVEN
@@ -119,7 +124,8 @@ public class ParkingServiceTest {
   // ----------------------------------------------------------------------------------------------------
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
-  public void getNextParkingNumberIfAvailable_shouldReturnParkingSpot(int arg1, ParkingType arg2) {
+  @DisplayName("Read ParkingSpot corresponding to the vehicle number")
+  public void getNextParkingNumberIfAvailable_returnParkingSpot(int arg1, ParkingType arg2) {
     // GIVEN
     when(inputReaderUtil.readSelection()).thenReturn(arg1);
     when(parkingSpotDAO.getNextAvailableSlot(arg2)).thenReturn(1);
@@ -131,6 +137,7 @@ public class ParkingServiceTest {
   }
 
   @Test
+  @DisplayName("IllegalArgumentException on reading zero parking number")
   public void getNextParkingNumberIfAvailable_incorrectInputVehicleType() {
     // GIVEN
     when(inputReaderUtil.readSelection()).thenReturn(0);
@@ -143,6 +150,7 @@ public class ParkingServiceTest {
 
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
+  @DisplayName("Exception on parking number with value -1")
   public void getNextParkingNumberIfAvailable_searchErrorParkingNumber(int arg1, ParkingType arg2) {
     // GIVEN
     when(inputReaderUtil.readSelection()).thenReturn(arg1);
@@ -159,7 +167,8 @@ public class ParkingServiceTest {
   // Method processExitingVehicle
   // ----------------------------------------------------------------------------------------------------
   @Test
-  public void processExitingVehicle_shouldFreeParking() throws Exception {
+  @DisplayName("Free parking")
+  public void processExitingVehicle_freeParking() throws Exception {
     // GIVEN
     when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
 
@@ -182,7 +191,8 @@ public class ParkingServiceTest {
   }
 
   @Test
-  public void processExitingVehicle_shouldThrowIllegalArgumentException_ofRegistrationNumber()
+  @DisplayName("IllegalArgumentException on reading vehicle registration number")
+  public void processExitingVehicle_throwIllegalArgumentException_ofRegistrationNumber()
       throws Exception {
     // GIVEN
     when(inputReaderUtil.readVehicleRegistrationNumber()).thenThrow(new IllegalArgumentException());
@@ -194,7 +204,8 @@ public class ParkingServiceTest {
   }
 
   @Test
-  public void processExitingVehicle_shouldThrowException_ofRegistrationNumber() throws Exception {
+  @DisplayName("Exception on reading vehicle registration number")
+  public void processExitingVehicle_throwException_ofRegistrationNumber() throws Exception {
     // GIVEN
     when(inputReaderUtil.readVehicleRegistrationNumber()).thenThrow(new Exception());
     ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
@@ -206,6 +217,7 @@ public class ParkingServiceTest {
 
 
   @Test
+  @DisplayName("Update ticket return false")
   public void processExitingVehicle_updateError_ofTicket() throws Exception {
     // GIVEN
     when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
