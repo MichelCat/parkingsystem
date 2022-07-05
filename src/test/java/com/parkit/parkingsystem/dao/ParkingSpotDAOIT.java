@@ -24,7 +24,7 @@ public class ParkingSpotDAOIT {
   private static ParkingSpotDAO parkingSpotDAO;
   private static DataBasePrepareService dataBasePrepareService;
 
-  private static ParkingSpot parkingSpot;
+  private ParkingSpot parkingSpot;
 
   private static Stream<Arguments> listOfParkingTypeParametersToTest() {
     // Elements (enum type of vehicle)

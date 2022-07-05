@@ -22,7 +22,7 @@ public class TicketDAOIT {
   private static TicketDAO ticketDAO;
   private static DataBasePrepareService dataBasePrepareService;
 
-  private static Ticket ticket;
+  private Ticket ticket;
 
 
   @BeforeAll
@@ -53,7 +53,7 @@ public class TicketDAOIT {
   // ----------------------------------------------------------------------------------------------------
   @Test
   @DisplayName("Save null ticket, return false")
-  public void saveTicket_nNullTicket_returnFalse() {
+  public void saveTicket_NullTicket_returnFalse() {
     // GIVEN
     ticket = null;
     // WHEN
