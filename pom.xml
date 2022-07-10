@@ -195,7 +195,7 @@
 				<configuration>
 					<xmlOutput>true</xmlOutput>
 					<!-- Optional directory to put spotbugs xdoc xml report -->
-					<xmlOutputDirectory>target/site</xmlOutputDirectory>
+					<xmlOutputDirectory>target/site/spotbugs</xmlOutputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
