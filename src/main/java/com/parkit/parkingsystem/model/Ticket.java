@@ -62,36 +62,48 @@ public class Ticket {
 
   // => mc 20/06/2022a : Add test compare ticket
   public boolean compare(Object o) {
-    if (this == o)
+    if (this == o) {
       return true;
-    if (o == null || getClass() != o.getClass())
+    }
+    if (o == null || getClass() != o.getClass()) {
       return false;
+    }
     Ticket that = (Ticket) o;
-    if (this.id != that.getId())
+    if (this.id != that.getId()) {
       return false;
-    if (!this.parkingSpot.equals(that.getParkingSpot()))
+    }
+    if (!this.parkingSpot.equals(that.getParkingSpot())) {
       return false;
-    if (this.price != that.getPrice())
+    }
+    if (this.price != that.getPrice()) {
       return false;
+    }
 
-    if ((this.vehicleRegNumber == null) ^ (that.getVehicleRegNumber() == null))
+    if ((this.vehicleRegNumber == null) ^ (that.getVehicleRegNumber() == null)) {
       return false;
-    if (this.vehicleRegNumber != null && !this.vehicleRegNumber.equals(that.getVehicleRegNumber()))
+    }
+    if (this.vehicleRegNumber != null
+        && !this.vehicleRegNumber.equals(that.getVehicleRegNumber())) {
       return false;
+    }
 
     // We test not test milliseconds
-    if ((this.inTime == null) ^ (that.getInTime() == null))
+    if ((this.inTime == null) ^ (that.getInTime() == null)) {
       return false;
+    }
     if (this.inTime != null && !ConversionDAO.dateToTimestampWithoutMilliseconds(this.inTime)
-        .equals(ConversionDAO.dateToTimestampWithoutMilliseconds(that.getInTime())))
+        .equals(ConversionDAO.dateToTimestampWithoutMilliseconds(that.getInTime()))) {
       return false;
+    }
 
     // We test not test milliseconds
-    if ((this.outTime == null) ^ (that.getOutTime() == null))
+    if ((this.outTime == null) ^ (that.getOutTime() == null)) {
       return false;
+    }
     if (this.outTime != null && !ConversionDAO.dateToTimestampWithoutMilliseconds(this.outTime)
-        .equals(ConversionDAO.dateToTimestampWithoutMilliseconds(that.getOutTime())))
+        .equals(ConversionDAO.dateToTimestampWithoutMilliseconds(that.getOutTime()))) {
       return false;
+    }
 
     return true;
   }

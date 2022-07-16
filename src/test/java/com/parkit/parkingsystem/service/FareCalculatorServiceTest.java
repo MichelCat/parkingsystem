@@ -52,9 +52,9 @@ public class FareCalculatorServiceTest {
   }
 
 
-  // ----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------
   // Method calculateFare
-  // ----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
   @DisplayName("Parking price calculation")
@@ -104,8 +104,8 @@ public class FareCalculatorServiceTest {
   @DisplayName("Parking price calculation with 45 minutes parking time")
   public void calculateFareWithLessThanOneHourParkingTime(ParkingType arg1, double arg2) {
     // GIVEN
-    inTime.setTime(currentTime - (45 * 60 * 1000));// 45 minutes parking time should
-                                                   // give 3/4th parking fare
+    inTime.setTime(currentTime - (45 * 60 * 1000)); // 45 minutes parking time should
+                                                    // give 3/4th parking fare
     ticket.setInTime(inTime);
     ticket.setOutTime(outTime);
     ParkingSpot parkingSpot = new ParkingSpot(1, arg1, false);
@@ -121,7 +121,7 @@ public class FareCalculatorServiceTest {
   @DisplayName("Parking price calculation with 24 hours parking time")
   public void calculateFareCarWithMoreThanADayParkingTime(ParkingType arg1, double arg2) {
     // GIVEN
-    inTime.setTime(currentTime - (24 * 60 * 60 * 1000));// 24 hours parking time
+    inTime.setTime(currentTime - (24 * 60 * 60 * 1000)); // 24 hours parking time
     // should give 24 * parking
     // fare per hour
     ticket.setInTime(inTime);
@@ -136,10 +136,10 @@ public class FareCalculatorServiceTest {
 
 
   // => mc 20/06/2022c : Free 30-min parking (storie)
-  // ----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------
   // Method calculateFare
   // Park for free when the user stays less than 30 minutes
-  // ----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------
   @ParameterizedTest(name = "{0} + {1}")
   @MethodSource("listOfParkingTypeParametersToTest")
   @DisplayName("Parking price calculation with 30 minutes parking time")
