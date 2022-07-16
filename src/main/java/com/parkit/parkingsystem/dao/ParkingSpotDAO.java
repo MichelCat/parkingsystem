@@ -12,7 +12,7 @@ import com.parkit.parkingsystem.model.ParkingSpot;
 
 // mc 20/06/2022b : Fix integration tests (storie)
 public class ParkingSpotDAO {
-  private static final Logger logger = LogManager.getLogger("ParkingSpotDAO");
+  private static final Logger LOGGER = LogManager.getLogger("ParkingSpotDAO");
 
   public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
@@ -28,7 +28,7 @@ public class ParkingSpotDAO {
         }
       }
     } catch (Exception ex) {
-      logger.error("Error fetching next available slot", ex);
+      LOGGER.error("Error fetching next available slot", ex);
     }
     return result;
   }
@@ -43,7 +43,7 @@ public class ParkingSpotDAO {
         return (updateRowCount == 1);
       }
     } catch (Exception ex) {
-      logger.error("Error updating parking info", ex);
+      LOGGER.error("Error updating parking info", ex);
       return false;
     }
   }
@@ -63,7 +63,7 @@ public class ParkingSpotDAO {
         }
       }
     } catch (Exception ex) {
-      logger.error("Error fetching next available slot", ex);
+      LOGGER.error("Error fetching next available slot", ex);
     }
     return parkingSpot;
   }

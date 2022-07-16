@@ -14,7 +14,7 @@ import com.parkit.parkingsystem.model.Ticket;
 // mc 20/06/2022d : 5%-discount for recurring users (storie)
 public class TicketDAO {
 
-  private static final Logger logger = LogManager.getLogger("TicketDAO");
+  private static final Logger LOGGER = LogManager.getLogger("TicketDAO");
 
   public DataBaseConfig dataBaseConfig = new DataBaseConfig();
 
@@ -30,7 +30,7 @@ public class TicketDAO {
         return (ps.executeUpdate() == 1);
       }
     } catch (Exception ex) {
-      logger.error("Error fetching next available slot", ex);
+      LOGGER.error("Error fetching next available slot", ex);
     }
     return false;
   }
@@ -56,7 +56,7 @@ public class TicketDAO {
         }
       }
     } catch (Exception ex) {
-      logger.error("Error fetching next available slot", ex);
+      LOGGER.error("Error fetching next available slot", ex);
     }
     return ticket;
   }
@@ -70,7 +70,7 @@ public class TicketDAO {
         return (ps.executeUpdate() == 1);
       }
     } catch (Exception ex) {
-      logger.error("Error saving ticket info", ex);
+      LOGGER.error("Error saving ticket info", ex);
     }
     return false;
   }
@@ -89,7 +89,7 @@ public class TicketDAO {
         }
       }
     } catch (Exception ex) {
-      logger.error("Error while retrieving the vehicle recurrence number", ex);
+      LOGGER.error("Error while retrieving the vehicle recurrence number", ex);
     }
     return numberOfRecurrence;
   }

@@ -13,7 +13,7 @@ import com.parkit.parkingsystem.util.InputReaderUtil;
 // mc 20/06/2022d : 5%-discount for recurring users (storie)
 public class ParkingService {
 
-  private static final Logger logger = LogManager.getLogger("ParkingService");
+  private static final Logger LOGGER = LogManager.getLogger("ParkingService");
 
   private static FareCalculatorService fareCalculatorService = new FareCalculatorService();
 
@@ -59,7 +59,7 @@ public class ParkingService {
         // =< mc 20/06/2022d
       }
     } catch (Exception e) {
-      logger.error("Unable to process incoming vehicle", e);
+      LOGGER.error("Unable to process incoming vehicle", e);
     }
   }
 
@@ -80,9 +80,9 @@ public class ParkingService {
         throw new Exception("Error fetching parking number from DB. Parking slots might be full");
       }
     } catch (IllegalArgumentException ie) {
-      logger.error("Error parsing user input for type of vehicle", ie);
+      LOGGER.error("Error parsing user input for type of vehicle", ie);
     } catch (Exception e) {
-      logger.error("Error fetching next available parking slot", e);
+      LOGGER.error("Error fetching next available parking slot", e);
     }
     return parkingSpot;
   }
@@ -130,7 +130,7 @@ public class ParkingService {
         System.out.println("Unable to update ticket information. Error occurred");
       }
     } catch (Exception e) {
-      logger.error("Unable to process exiting vehicle", e);
+      LOGGER.error("Unable to process exiting vehicle", e);
     }
   }
 }
