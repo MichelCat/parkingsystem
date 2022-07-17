@@ -5,18 +5,21 @@ import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import com.parkit.parkingsystem.constants.ParkingType;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+@ExtendWith(MockitoExtension.class)
 class TicketTest {
 
   private static Ticket ticket;
-  private static ParkingSpot parkingSpot;
   private static Date currentTime = new Date(System.currentTimeMillis());
+
+  @Mock
+  private static ParkingSpot parkingSpot;
 
   @BeforeEach
   private void setUpPerTest() {
-    parkingSpot = new ParkingSpot(1, ParkingType.CAR, false);
-
     ticket = new Ticket();
     ticket.setId(1);
     ticket.setParkingSpot(parkingSpot);
@@ -54,16 +57,17 @@ class TicketTest {
     assertEquals(ticket.getParkingSpot(), parkingSpot);
   }
 
+
   // -----------------------------------------------------------------------------------------------
   // Method setParkingSpot
   // -----------------------------------------------------------------------------------------------
   @Test
   @DisplayName("Write ParkingSpot")
   public void setParkingSpot_writeParkingSpot() {
-    ParkingSpot parkingSpotToTest = new ParkingSpot(2, ParkingType.CAR, false);
-    ticket.setParkingSpot(parkingSpotToTest);
-    assertEquals(ticket.getParkingSpot(), parkingSpotToTest);
+    ticket.setParkingSpot(parkingSpot);
+    assertEquals(ticket.getParkingSpot(), parkingSpot);
   }
+
 
   // -----------------------------------------------------------------------------------------------
   // Method getVehicleRegNumber
