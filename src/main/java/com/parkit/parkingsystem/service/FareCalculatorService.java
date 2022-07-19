@@ -26,7 +26,7 @@ public class FareCalculatorService {
     // =< MC 06/06/2020a
     // => mc 20/06/2022c : Free 30-min parking (storie)
     // Park for free when the user stays less than 30 minutes
-    if (outHour - inHour < 30 * 60 * 1000) {
+    if (duration < 0.5) {
       duration = 0.0;
     }
     // =< mc 20/06/2022c
