@@ -116,7 +116,7 @@ public class ParkingService {
       // => mc 20/06/2022d : 5%-discount for recurring users (storie)
       // 5% discount for repeat users
       if (ticketDAO.getVehicleRecurrenceNumberOutput(vehicleRegNumber) > 0) {
-        ticket.setPrice(ticket.getPrice() * 0.05); // 5% discount
+        fareCalculatorService.discountForRecurringUsers(ticket);
       }
       // =< mc 20/06/2022d
       if (ticketDAO.updateTicket(ticket)) {

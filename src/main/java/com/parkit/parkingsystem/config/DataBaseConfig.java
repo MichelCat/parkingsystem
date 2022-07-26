@@ -12,15 +12,10 @@ public class DataBaseConfig {
 
   private static final Logger LOGGER = LogManager.getLogger("DataBaseConfig");
 
-  private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
-  private static final String DB_URL = "jdbc:mysql://localhost:3306/prod";
-  private static final String DB_LOGIN = "root";
-  private static final String DB_PASSWORD = "MySqlOracle1.";
-
   public Connection getConnection() throws ClassNotFoundException, SQLException {
     LOGGER.info("Create DB connection");
-    Class.forName(DB_DRIVER);
-    return DriverManager.getConnection(DB_URL, DB_LOGIN, DB_PASSWORD);
+    Class.forName("com.mysql.cj.jdbc.Driver");
+    return DriverManager.getConnection("jdbc:mysql://localhost:3306/prod", "root", "MySqlOracle1.");
   }
 
   public void closeConnection(Connection con) {
