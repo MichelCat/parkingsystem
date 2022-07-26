@@ -51,6 +51,7 @@ public class ParkingServiceTest {
     when(inputReaderUtil.readVehicleRegistrationNumber()).thenReturn("ABCDEF");
     when(inputReaderUtil.readSelection()).thenReturn(arg1);
     when(parkingSpotDAO.getNextAvailableSlot(arg2)).thenReturn(1);
+    when(ticketDAO.getVehicleRecurrenceNumberOutput("ABCDEF")).thenReturn(1);
     ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);
     // WHEN
     parkingService.processIncomingVehicle();
@@ -178,6 +179,7 @@ public class ParkingServiceTest {
     ticket.setParkingSpot(parkingSpot);
     ticket.setVehicleRegNumber("ABCDEF");
     when(ticketDAO.getTicket(anyString())).thenReturn(ticket);
+    when(ticketDAO.getVehicleRecurrenceNumberOutput("ABCDEF")).thenReturn(1);
     when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(true);
 
     when(parkingSpotDAO.updateParking(any(ParkingSpot.class))).thenReturn(true);
@@ -228,6 +230,7 @@ public class ParkingServiceTest {
     ticket.setParkingSpot(parkingSpot);
     ticket.setVehicleRegNumber("ABCDEF");
     when(ticketDAO.getTicket(anyString())).thenReturn(ticket);
+    when(ticketDAO.getVehicleRecurrenceNumberOutput("ABCDEF")).thenReturn(1);
     when(ticketDAO.updateTicket(any(Ticket.class))).thenReturn(false);
 
     ParkingService parkingService = new ParkingService(inputReaderUtil, parkingSpotDAO, ticketDAO);

@@ -44,4 +44,8 @@ public class FareCalculatorService {
         throw new IllegalArgumentException("Unkown Parking Type");
     }
   }
+
+  public void discountForRecurringUsers(Ticket ticket) {
+    ticket.setPrice(ticket.getPrice() * 0.05); // 5% discount
+  }
 }

@@ -189,4 +189,18 @@ public class FareCalculatorServiceTest {
   }
   // =< mc 20/06/2022c
 
+
+  // -----------------------------------------------------------------------------------------------
+  // Method discountForRecurringUsers
+  // -----------------------------------------------------------------------------------------------
+  @Test
+  @DisplayName("Write discount for recurring users")
+  public void setId_writeIdentityTicket() {
+    // GIVEN
+    ticket.setPrice(100);
+    // WHEN
+    fareCalculatorService.discountForRecurringUsers(ticket);
+    // THEN
+    assertEquals(100 * 0.05, ticket.getPrice());
+  }
 }
